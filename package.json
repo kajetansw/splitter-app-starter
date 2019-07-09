@@ -1,0 +1,24 @@
+{
+  "name": "splitter-js",
+  "version": "1.0.0",
+  "description": "Copy of Splitwise© app, made for my JS/TS/Angular workshops.",
+  "main": "index.js",
+  "scripts": {
+    "start": "yarn start:dev",
+    "start:dev": "nodemon index.js --ext js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kajetan Swiatek",
+  "license": "mpl-2.0",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "simple-json-db": "^1.2.1",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
+}

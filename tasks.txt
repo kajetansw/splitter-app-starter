@@ -1,0 +1,10 @@
+1. Implement Create, Read, Update and Delete (CRUD) operations for User.
+2. Send all Actions for user of given "id".
+3. Send all Statuses for user of given "id".
+4. Send all Actions for user of given "id" but also filtered by "ActionType".
+5. Send all Actions for user of given "id" but also filtered by "date" range.
+6. Collect all statuses for given user and map them to sentences:
+   - "You owe ${name} ${amount}." -> when you are the "debtor" of the status.
+   - "You are owed ${amount} by ${name}." -> when you are the "owner" of the   
+     status.
+7. Adding new Action (with calculation and updating corresponding Status).

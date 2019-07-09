@@ -1,0 +1,22 @@
+{
+  "users": [
+    {
+      "id": "5fcf4c11-14c0-4ade-b98f-9fb37e6d5d09",
+      "name": "Jan",
+      "email": "jan@jan.pl",
+      "password": "$2a$12$XS/nWfQNlJ5MUEUjL1Xh5.Y253u1r3cwtM4ncrkPKN.x8vU4YIUxy"
+    },
+    {
+      "id": "bc2f3ca3-9a66-4a1f-8042-70b708a073bd",
+      "name": "Kajetan",
+      "email": "kajetan@kajetan.pl",
+      "password": "$2a$12$XS/nWfQNlJ5MUEUjL1Xh5.Y253u1r3cwtM4ncrkPKN.x8vU4YIUxy"
+    },
+    {
+      "id": "jstnf2f8-35fc-48da-b78a-6ddb1ba7204e",
+      "name": "Szczepan",
+      "email": "szczepan@szczepan.pl",
+      "password": "$2a$12$XS/nWfQNlJ5MUEUjL1Xh5.Y253u1r3cwtM4ncrkPKN.x8vU4YIUxy"
+    }
+  ]
+}
