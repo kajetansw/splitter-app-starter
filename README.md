@@ -17,12 +17,12 @@ Clone of Splitwise© application made for JS/TS/Angular workshops.
 ### Installing
 
 ```
-git clone https://github.com/kajetansw/splitter-app.git
-cd splitter-app
+git clone https://github.com/kajetansw/splitter-app-starter.git
+cd splitter-app-starter
 npm install
 ```
 
-Run application with `yarn start`. Application will host on `localhost:3000`.
+Run application with `npm run start` or `npm run start:dev` (for development). Application will host on `localhost:3000`.
 
 ## Running unit tests
 
@@ -42,7 +42,9 @@ TBD
 
 ## Authors
 
-* **Kajetan Świątek** \#\#\# [dev-self-start.blogspot.com](https://dev-self-start.blogspot.com/) \#\#\# [Twitter](https://twitter.com/KajetanSw)
+* **Kajetan Świątek**
+ [dev-self-start.blogspot.com](https://dev-self-start.blogspot.com/) 
+  [Twitter](https://twitter.com/KajetanSw)
 
 ## License
 
