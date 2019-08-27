@@ -1,3 +1,5 @@
+declare module 'simple-json-db';
+
 /*
 #################################
   DB MODELS
