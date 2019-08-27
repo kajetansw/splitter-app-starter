@@ -1,5 +1,16 @@
+EXPRESS.JS
 - https://restfulapi.net/resource-naming/ - REST naming conventions
 - https://flaviocopes.com/es6/ - guide to ES6
 - https://developer.mozilla.org/en-US/docs/Web/HTTP/Status - HTTP status codes
 - https://expressjs.com/en/starter/hello-world.html - express.js guide`
 - https://www.freecodecamp.org/news/securing-node-js-restful-apis-with-json-web-tokens-9f811a92bb52/ - how to implement JWT authentication in NodeJS
+
+TYPESCRIPT
+- https://alligator.io/typescript/new-project/ - init TypeScript project
+- yarn add typescript --dev, tsc --init
+- tsconfig -> sourcemaps: "true", outDir: "./dist"
+- yarn add @types/express @types/uuid @types/bcryptjs @types/jsonwebtoken --dev
+
+TSLINT
+- yarn add tslint --dev
+- ./node_modules/.bin/tslint --init
