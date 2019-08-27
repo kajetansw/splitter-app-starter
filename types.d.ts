@@ -1,8 +1,14 @@
+/*
+#################################
+  DB MODELS
+#################################
+*/
+
 type Status = {
   id: string;
   amount: number;
-  owner: string | User;
-  debtor: string | User;
+  owner: string;
+  debtor: string;
 };
 
 type User = {
@@ -16,14 +22,38 @@ type Action = {
   id: string;
   description: string;
   type: ActionType;
-  date: Date;
+  date: string;
   amount: number;
-  payer: string | User;
-  debtor: string | User;
+  payer: string;
+  debtor: string;
 };
 
-type ActionType = 
-  'SHOPPING' 
+type ActionType =
+  'SHOPPING'
   | 'BILLS'
   | 'TRIP'
   | 'RESTAURANT';
+
+
+/*
+#################################
+  SIMPLE-JSON-DB MODELS
+#################################
+*/
+
+type PathCollection = {
+  users: User[];
+  actions: Action[];
+  statuses: Status[];
+};
+
+type SimpleDb = {
+  get:
+    <Path extends keyof PathCollection>
+      (path: Path)
+        => PathCollection[Path];
+  set:
+    <Path extends keyof PathCollection>
+      (path: Path, value: PathCollection[Path])
+        => void;
+};
