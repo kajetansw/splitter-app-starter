@@ -22,7 +22,7 @@ cd splitter-app-starter
 npm install
 ```
 
-Run application with `yarn start`. Application will host on `localhost:3000`.
+Run application with `npm run start` or `yarn start`. Application will host on `localhost:3000`.
 
 ## Running unit tests
 
