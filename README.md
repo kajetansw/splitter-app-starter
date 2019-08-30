@@ -17,8 +17,8 @@ Clone of Splitwise© application made for JS/TS/Angular workshop hosted by Kajet
 ### Installing
 
 ```
-git clone https://github.com/kajetansw/splitter-app.git
-cd splitter-app
+git clone https://github.com/kajetansw/splitter-app-starter.git
+cd splitter-app-starter
 npm install
 ```
 
