@@ -1,10 +1,10 @@
 import { User, Action } from './types';
 
 interface API {
-  '/users/all': {
+  '/api/users/all': {
     GET: {}
   };
-  '/user/:id': {
+  '/api/user/:id': {
     GET: {
       params: {
         id: string
@@ -16,14 +16,14 @@ interface API {
       }
     }
   };
-  '/user/:id/actions': {
+  '/api/user/:id/actions': {
     GET: {
       params: {
         id: string
       }
     }
   };
-  '/user/:id/actions/by-date': {
+  '/api/user/:id/actions/by-date': {
     POST: {
       params: {
         id: string
@@ -31,41 +31,41 @@ interface API {
       body: { startDate: string, endDate: string }
     }
   };
-  '/users': {
+  '/api/users': {
     POST: {
       body: User
     }
   };
-  '/user/:id/statuses': {
+  '/api/user/:id/statuses': {
     GET: {
       params: {
         id: string
       }
     }
   };
-  '/user/:id/statuses/texts': {
+  '/api/user/:id/statuses/texts': {
     GET: {
       params: {
         id: string
       }
     }
   };
-  '/user/:id/statuses/profitable': {
+  '/api/user/:id/statuses/profitable': {
     GET: {
       params: {
         id: string
       }
     }
   };
-  '/user': {
+  '/api/user': {
     POST: {
       body: User
     }
   };
-  '/actions/all': {
+  '/api/actions/all': {
     GET: {}
   };
-  '/action/:id': {
+  '/api/action/:id': {
     GET: {
       params: {
         id: string
@@ -77,27 +77,27 @@ interface API {
       }
     }
   };
-  '/action': {
+  '/api/action': {
     POST: {
       body: Action
     }
   };
-  '/statuses/all': {
+  '/api/statuses/all': {
     GET: {}
   };
-  '/status/:id': {
+  '/api/status/:id': {
     GET: {
       params: {
         id: string
       }
     }
   };
-  '/login': {
+  '/api/login': {
     POST: {
       body: { email: string, password: string }
     }
   };
-  '/register': {
+  '/api/register': {
     POST: {
       body: User
     }

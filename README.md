@@ -11,24 +11,30 @@ Clone of Splitwise© application made for JS/TS/Angular workshop hosted by Kajet
 
 ### Prerequisites
 
-* NodeJS
-* **npm** or **yarn** package manager
+* The newset NodeJS
+* **yarn** package manager
 
 ### Installing
 
 ```
-git clone https://github.com/kajetansw/splitter-app.git
-cd splitter-app
-npm install
+git clone https://github.com/kajetansw/splitter-app-starter.git
+cd splitter-app-starter
+yarn ins
 ```
 
+### Running application
+
+##### Express API
 Build distribution with `yarn build`. Files will be generated in `./dist` 
 directory.
 Run `yarn clear` to remove distribution.
 Run application with `yarn start`. Application will host on `localhost:3000`.
 To run live-server run `yarn watch`.
 
-## Running unit tests
+##### Angular web app
+Run application in dev mode with `yarn start` inside `./webapp`. Application will host on `localhost:4200`.
+
+### Running unit tests
 
 TBD
 

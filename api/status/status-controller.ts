@@ -5,7 +5,7 @@ const statusRepository = require('./status-repository');
 
 const statusController = {
   getAll: (
-    req: API['/statuses/all']['GET'],
+    req: API['/api/statuses/all']['GET'],
     res: express.Response
   ) => {
     res.status(200);
@@ -13,7 +13,7 @@ const statusController = {
   },
 
   getById: (
-    req: API['/status/:id']['GET'],
+    req: API['/api/status/:id']['GET'],
     res: express.Response
   ) => {
     const status = statusRepository.findById(req.params.id);

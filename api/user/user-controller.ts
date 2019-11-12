@@ -9,7 +9,7 @@ import { API } from '../../api';
 
 const userController = {
   getAll: (
-    req: API['/users/all']['GET'],
+    req: API['/api/users/all']['GET'],
     res: express.Response
   ) => {
     res.status(200);
@@ -17,7 +17,7 @@ const userController = {
   },
 
   getById: (
-    req: API['/user/:id']['GET'],
+    req: API['/api/user/:id']['GET'],
     res: express.Response
   ) => {
     const user = userRepository.findById(req.params.id);
@@ -31,7 +31,7 @@ const userController = {
   },
 
   getUserActions: (
-    req: API['/user/:id/actions']['GET'],
+    req: API['/api/user/:id/actions']['GET'],
     res: express.Response
   ) => {
     const actions = actionRepository.findAll();
@@ -53,7 +53,7 @@ const userController = {
   },
 
   getUserActionsByDate: (
-    req: API['/user/:id/actions/by-date']['POST'],
+    req: API['/api/user/:id/actions/by-date']['POST'],
     res: express.Response
   ) => {
     const actions = actionRepository.findAll();
@@ -84,7 +84,7 @@ const userController = {
   },
 
   getUserStatuses: (
-    req: API['/user/:id/statuses']['GET'],
+    req: API['/api/user/:id/statuses']['GET'],
     res: express.Response
   ) => {
     const statuses = statusRepository.findAll();
@@ -106,7 +106,7 @@ const userController = {
   },
 
   getUserStatusesTexts: (
-    req: API['/user/:id/statuses/texts']['GET'],
+    req: API['/api/user/:id/statuses/texts']['GET'],
     res: express.Response
   ) => {
     const statuses = statusRepository.findAll();
@@ -138,7 +138,7 @@ const userController = {
   },
 
   getUserStatusesProfitable: (
-    req: API['/user/:id/statuses/profitable']['GET'],
+    req: API['/api/user/:id/statuses/profitable']['GET'],
     res: express.Response
   ) => {
     const statuses = statusRepository.findAll();
@@ -158,7 +158,7 @@ const userController = {
   },
 
   save: (
-    req: API['/user']['POST'],
+    req: API['/api/user']['POST'],
     res: express.Response
   ) => {
     userRepository.save(req.body);
@@ -167,7 +167,7 @@ const userController = {
   },
 
   delete: (
-    req: API['/user/:id']['DELETE'],
+    req: API['/api/user/:id']['DELETE'],
     res: express.Response
   ) => {
     // TODO delete all actions and status after delete
@@ -178,7 +178,7 @@ const userController = {
   },
 
   register: (
-    req: API['/register']['POST'],
+    req: API['/api/register']['POST'],
     res: express.Response
   ) => {
     const hashedPassword = bcrypt.hashSync(req.body.password, 12);
@@ -195,7 +195,7 @@ const userController = {
   },
 
   login: (
-    req: API['/login']['POST'],
+    req: API['/api/login']['POST'],
     res: express.Response
   ) => {
     const user = userRepository.findByEmail(req.body.email);

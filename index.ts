@@ -12,29 +12,29 @@ const port = 3000;
 app.use(bodyParser.json());
 
 // users
-app.get('/users/all', userController.getAll);
-app.get('/user/:id', userController.getById);
-app.delete('/user/:id', userController.delete);
-app.get('/user/:id/actions', userController.getUserActions);
-app.post('/user/:id/actions/by-date', userController.getUserActionsByDate);
-app.get('/user/:id/statuses', userController.getUserStatuses);
-app.get('/user/:id/statuses/texts', userController.getUserStatusesTexts);
-app.get('/user/:id/statuses/profitable', userController.getUserStatusesProfitable);
-app.post('/user', userController.save);
+app.get('/api/users/all', userController.getAll);
+app.get('/api/user/:id', userController.getById);
+app.delete('/api/user/:id', userController.delete);
+app.get('/api/user/:id/actions', userController.getUserActions);
+app.post('/api/user/:id/actions/by-date', userController.getUserActionsByDate);
+app.get('/api/user/:id/statuses', userController.getUserStatuses);
+app.get('/api/user/:id/statuses/texts', userController.getUserStatusesTexts);
+app.get('/api/user/:id/statuses/profitable', userController.getUserStatusesProfitable);
+app.post('/api/user', userController.save);
 
 // actions
-app.get('/actions/all', actionController.getAll);
-app.get('/action/:id', actionController.getById);
-app.delete('/action/:id', actionController.delete);
-app.post('/action', actionController.save);
+app.get('/api/actions/all', actionController.getAll);
+app.get('/api/action/:id', actionController.getById);
+app.delete('/api/action/:id', actionController.delete);
+app.post('/api/action', actionController.save);
 
 // status
-app.get('/statuses/all', statusController.getAll);
-app.get('/status/:id', statusController.getById);
+app.get('/api/statuses/all', statusController.getAll);
+app.get('/api/status/:id', statusController.getById);
 
 // auth
-app.post('/login', userController.login);
-app.post('/register', userController.register);
+app.post('/api/login', userController.login);
+app.post('/api/register', userController.register);
 
 // start server
 app.listen(port, () => {

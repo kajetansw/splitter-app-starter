@@ -6,7 +6,7 @@ import statusRepository from '../status/status-repository';
 
 const actionController = {
   getAll: (
-    req: API['/actions/all']['GET'],
+    req: API['/api/actions/all']['GET'],
     res: express.Response
   ) => {
     res.status(200);
@@ -14,7 +14,7 @@ const actionController = {
   },
 
   getById: (
-    req: API['/action/:id']['GET'],
+    req: API['/api/action/:id']['GET'],
     res: express.Response
   ) => {
     const action = actionRepository.findById(req.params.id);
@@ -28,7 +28,7 @@ const actionController = {
   },
 
   save: (
-    req: API['/action']['POST'],
+    req: API['/api/action']['POST'],
     res: express.Response
   ) => {
     const savedAction = actionRepository.save(req.body);
@@ -70,7 +70,7 @@ const actionController = {
   },
 
   delete: (
-    req: API['/action/:id']['DELETE'],
+    req: API['/api/action/:id']['DELETE'],
     res: express.Response
   ) => {
     // TODO calculate status after delete
