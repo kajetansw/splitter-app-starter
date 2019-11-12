@@ -1,4 +1,6 @@
-declare module 'simple-json-db';
+import * as express from 'express';
+import { Server } from 'http';
+import { API } from './api';
 
 /*
 #################################
@@ -59,3 +61,51 @@ type SimpleDb = {
       (path: Path, value: PathCollection[Path])
         => void;
 };
+
+/*
+#################################
+  EXPRESS.JS MODELS
+#################################
+*/
+
+export type Application = {
+  use: (...handlers: express.RequestHandler[]) => Application;
+  post:
+    <Path extends keyof API>(
+      path: Path,
+      callback: <Method extends keyof API[Path]>(
+        request: TypedRequest<Method extends 'POST' ? API[Path][Method] : API[Path][never]>,
+        response: express.Response
+      ) => void
+    ) => void;
+  get:
+    <Path extends keyof API>(
+      path: Path,
+      callback: <Method extends keyof API[Path]>(
+        request: TypedRequest<Method extends 'GET' ? API[Path][Method] : API[Path][never]>,
+        response: express.Response
+      ) => void
+    ) => void;
+  delete:
+    <Path extends keyof API>(
+      path: Path,
+      callback: <Method extends keyof API[Path]>(
+        request: TypedRequest<Method extends 'DELETE' ? API[Path][Method] : API[Path][never]>,
+        response: express.Response
+      ) => void
+    ) => void;
+  listen: (port: number, callback?: () => void) => Server;
+};
+
+export interface RestypedRoute {
+  params?: any;
+  query?: any;
+  body?: any;
+  response?: any;
+}
+
+export interface TypedRequest<T extends RestypedRoute> extends express.Request {
+  body: T['body'];
+  params: T['params'];
+  query: T['query'];
+}

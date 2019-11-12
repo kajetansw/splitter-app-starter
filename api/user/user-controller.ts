@@ -1,17 +1,25 @@
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcryptjs';
+import express from 'express';
 
-const userRepository = require('./user-repository');
-const actionRepository = require('./../action/action-repository');
-const statusRepository = require('./../status/status-repository');
+import userRepository from './user-repository';
+import actionRepository from './../action/action-repository';
+import statusRepository from './../status/status-repository';
+import { API } from '../../api';
 
 const userController = {
-  getAll: (req, res) => {
+  getAll: (
+    req: API['/users/all']['GET'],
+    res: express.Response
+  ) => {
     res.status(200);
     res.send(userRepository.findAll());
   },
 
-  getById: (req, res) => {
+  getById: (
+    req: API['/user/:id']['GET'],
+    res: express.Response
+  ) => {
     const user = userRepository.findById(req.params.id);
     if (user) {
       res.status(200);
@@ -21,19 +29,22 @@ const userController = {
       res.send({});
     }
   },
-  
-  getUserActions: (req, res) => {
+
+  getUserActions: (
+    req: API['/user/:id/actions']['GET'],
+    res: express.Response
+  ) => {
     const actions = actionRepository.findAll();
     const userId = req.params.id;
-    
+
     if (userRepository.findById(userId)) {
       res.status(200);
 
       const outputActions = actions
-        .filter(action => 
+        .filter(action =>
           action.payer === userId || action.debtor === userId
         );
-        
+
       res.send(outputActions);
     } else {
       res.status(400);
@@ -41,7 +52,10 @@ const userController = {
     }
   },
 
-  getUserActionsByDate: (req, res) => {
+  getUserActionsByDate: (
+    req: API['/user/:id/actions/by-date']['POST'],
+    res: express.Response
+  ) => {
     const actions = actionRepository.findAll();
     const userId = req.params.id;
     const dateRange = {
@@ -49,16 +63,16 @@ const userController = {
       startDate: new Date(Date.parse(req.body.startDate)),
       endDate: new Date(Date.parse(req.body.endDate))
     };
-    
+
     if (userRepository.findById(userId)) {
       res.status(200);
 
       const outputActions = actions
-        .filter(action => 
+        .filter(action =>
           action.payer === userId || action.debtor === userId
         )
-        .filter(action => 
-          new Date(Date.parse(action.date)) < dateRange.endDate  
+        .filter(action =>
+          new Date(Date.parse(action.date)) < dateRange.endDate
           && dateRange.startDate < new Date(Date.parse(action.date))
         );
 
@@ -69,18 +83,21 @@ const userController = {
     }
   },
 
-  getUserStatuses: (req, res) => {
+  getUserStatuses: (
+    req: API['/user/:id/statuses']['GET'],
+    res: express.Response
+  ) => {
     const statuses = statusRepository.findAll();
     const userId = req.params.id;
-    
+
     if (userRepository.findById(userId)) {
       res.status(200);
 
       const outputStatuses = statuses
-        .filter(status => 
+        .filter(status =>
           status.owner === userId || status.debtor === userId
         );
-        
+
       res.send(outputStatuses);
     } else {
       res.status(400);
@@ -88,15 +105,18 @@ const userController = {
     }
   },
 
-  getUserStatusesTexts: (req, res) => {
+  getUserStatusesTexts: (
+    req: API['/user/:id/statuses/texts']['GET'],
+    res: express.Response
+  ) => {
     const statuses = statusRepository.findAll();
     const userId = req.params.id;
-    
+
     if (userRepository.findById(userId)) {
       res.status(200);
 
       const outputStatuses = statuses
-        .filter(status => 
+        .filter(status =>
           status.owner === userId || status.debtor === userId
         )
         .map(status => ({
@@ -105,11 +125,11 @@ const userController = {
           debtor: userRepository.findById(status.debtor)
         }))
         .map(status => {
-          return userId === status.owner.id
-            ? `You are owned $${status.amount} by ${status.debtor.name}.`
-            : `You own $${status.amount} to ${status.owner.name}.`
+          return userId === status.owner!.id
+            ? `You are owned $${status.amount} by ${status.debtor!.name}.`
+            : `You own $${status.amount} to ${status.owner!.name}.`;
         });
-        
+
       res.send(outputStatuses);
     } else {
       res.status(400);
@@ -117,10 +137,13 @@ const userController = {
     }
   },
 
-  getUserStatusesProfitable: (req, res) => {
+  getUserStatusesProfitable: (
+    req: API['/user/:id/statuses/profitable']['GET'],
+    res: express.Response
+  ) => {
     const statuses = statusRepository.findAll();
     const userId = req.params.id;
-    
+
     if (userRepository.findById(userId)) {
       res.status(200);
 
@@ -134,19 +157,68 @@ const userController = {
     }
   },
 
-  save: (req, res) => {
+  save: (
+    req: API['/user']['POST'],
+    res: express.Response
+  ) => {
     userRepository.save(req.body);
     res.status(200);
     res.send(req.body);
   },
 
-  delete: (req, res) => {
+  delete: (
+    req: API['/user/:id']['DELETE'],
+    res: express.Response
+  ) => {
     // TODO delete all actions and status after delete
     const userToDelete = userRepository.findById(req.params.id);
     userRepository.delete(req.params.id);
     res.status(200);
     res.send(userToDelete);
+  },
+
+  register: (
+    req: API['/register']['POST'],
+    res: express.Response
+  ) => {
+    const hashedPassword = bcrypt.hashSync(req.body.password, 12);
+    const user = userRepository.save({ ...req.body, password: hashedPassword });
+
+    const token = jwt.sign(
+      { id: user.id },
+      'mysecret',
+      { expiresIn: 86400 }
+    );
+
+    res.status(200);
+    res.send({ auth: true, token });
+  },
+
+  login: (
+    req: API['/login']['POST'],
+    res: express.Response
+  ) => {
+    const user = userRepository.findByEmail(req.body.email);
+
+    if (!user) {
+      return res.status(500).send('No user found.');
+    }
+
+    const passwordIsValid
+      = bcrypt.compareSync(req.body.password, user.password);
+
+    if (!passwordIsValid) {
+      return res.status(401).send({ auth: false, token: null });
+    }
+
+    const token = jwt.sign(
+      { id: user.id },
+      'mysecret',
+      { expiresIn: 86400 }
+    );
+
+    res.status(200).send({ auth: true, token });
   }
 };
 
-module.exports = userController;
+export default userController;

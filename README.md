@@ -22,7 +22,11 @@ cd splitter-app
 npm install
 ```
 
+Build distribution with `yarn build`. Files will be generated in `./dist` 
+directory.
+Run `yarn clear` to remove distribution.
 Run application with `yarn start`. Application will host on `localhost:3000`.
+To run live-server run `yarn watch`.
 
 ## Running unit tests
 
@@ -34,7 +38,7 @@ TBD
 
 ### And coding style tests
 
-TBD
+Run `yarn lint` to check for linting errors.
 
 ## Deployment
 

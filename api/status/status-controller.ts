@@ -1,12 +1,21 @@
+import { API } from '../../api';
+import express from 'express';
+
 const statusRepository = require('./status-repository');
 
 const statusController = {
-  getAll: (req, res) => {
+  getAll: (
+    req: API['/statuses/all']['GET'],
+    res: express.Response
+  ) => {
     res.status(200);
     res.send(statusRepository.findAll());
   },
 
-  getById: (req, res) => {
+  getById: (
+    req: API['/status/:id']['GET'],
+    res: express.Response
+  ) => {
     const status = statusRepository.findById(req.params.id);
     if (status) {
       res.status(200);
@@ -18,4 +27,4 @@ const statusController = {
   }
 };
 
-module.exports = statusController;
+export default statusController;

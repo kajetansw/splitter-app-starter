@@ -4,9 +4,13 @@
   "description": "Copy of Splitwise© app, made for my JS/TS/Angular workshops.",
   "main": "index.js",
   "scripts": {
+    "build": "yarn clear && tsc",
+    "clear": "rimraf dist",
+    "lint": "tslint --project .",
     "start": "yarn start:dev",
-    "start:dev": "nodemon index.js --ext js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:dev": "ts-node ./index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "nodemon --watch . --ext ts --ignore './db/*' --exec yarn start:dev"
   },
   "author": "Kajetan Swiatek",
   "license": "mpl-2.0",
@@ -24,6 +28,7 @@
     "@types/jsonwebtoken": "^8.3.3",
     "@types/uuid": "^3.4.5",
     "nodemon": "^1.19.1",
+    "rimraf": "^3.0.0",
     "ts-node": "^8.3.0",
     "tslint": "^5.19.0",
     "typescript": "^3.5.3"
